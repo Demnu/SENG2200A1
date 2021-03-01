@@ -1,5 +1,6 @@
 public class Point{
-    double x, y;
+    private double x;
+    private double y;
 
     Point(double xInput, double yInput){
         x = xInput;
@@ -11,13 +12,22 @@ public class Point{
 
     public String toString(){
 
-        x=2;
-        y=3;
-        String s;
-        s = "(" + x + " , " + y + ")";
-        return s;
+        String str;  
+        String strX = String.format("%3.2f", x);
+        String strY = String.format("%3.2f", y); 
+
+        str = "(" + strX + " , " + strY + ")";
+        return str;
     }
     
+    public double getX()
+    {
+        return x;
+    }
 
+    public double getY()
+    {
+        return y;
+    }
 
 }
