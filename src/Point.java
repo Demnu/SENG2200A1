@@ -1,32 +1,38 @@
-public class Point{
+public class Point {
     private double x;
     private double y;
-
-    Point(double xInput, double yInput){
+    //Constructor
+    Point(double xInput, double yInput) {
         x = xInput;
         y = yInput;
     }
-    public double distance(){
-        return 0;
-    }
 
-    public String toString(){
+    //Preconditions
+    //None
+    //Postconditions
+    //Returns a string containing the co-ordinates of the point
+    public String toString() {
 
-        String str;  
+        String str;
         String strX = String.format("%3.2f", x);
-        String strY = String.format("%3.2f", y); 
+        String strY = String.format("%3.2f", y);
 
         str = "(" + strX + " , " + strY + ")";
         return str;
     }
-    
-    public double getX()
-    {
+
+    //Preconditions
+    //None
+    //Postconditions
+    //Returns the double x
+    public double getX() {
         return x;
     }
-
-    public double getY()
-    {
+    //Preconditions
+    //None
+    //Postconditions
+    //Returns the double y
+    public double getY() {
         return y;
     }
 

@@ -1,50 +1,70 @@
-public class Node<T> {
-    
-    Node<T> prev;
-    Node<T> next;
-    T data;
+public class Node {
 
-    Node()
-    {
+    private Node prev;
+    private Node next;
+    private Polygon data;
+
+    //Constructor
+    Node() {
         prev = null;
         next = null;
         data = null;
     }
 
-    Node (Node<T> prevInput, Node<T> nextInput, T dataInput)
-    {
+    //Constructor
+    Node(Node prevInput, Node nextInput, Polygon dataInput) {
         prev = prevInput;
         next = nextInput;
         data = dataInput;
     }
 
-    public Node<T> getPrev(){
+    //Preconditions
+    //None
+    //Postconditions
+    //Returns the object Node Prev
+    public Node getPrev() {
         return prev;
     }
 
-    public Node<T> getNext(){
+    //Preconditions
+    //None
+    //Postconditions
+    //Returns the object Node Next
+    public Node getNext() {
         return next;
     }
 
-    public T getData()
-    {
-        
+    //Preconditions
+    //None
+    //Postconditions
+    //Returns the object Polygon data
+    public Polygon getData() {
         return data;
     }
 
 
-
-    public void setPrev(Node<T> temp){
+    //Preconditions
+    //Recieves an object of type Node
+    //Postconditions
+    //Sets Node prev to the recieved Node
+    public void setPrev(Node temp) {
         prev = temp;
     }
 
-    public void setNext(Node<T> temp){
+    //Preconditions
+    //Recieves an object of type Node
+    //Postconditions
+    //Sets Node next to the recieved Node
+    public void setNext(Node temp) {
         next = temp;
     }
 
-    public void setData(T input){
+    //Preconditions
+    //Recieves an object of type Polygon
+    //Postconditions
+    //Sets Polygon data to the recieved Polygon
+    public void setData(Polygon input) {
         data = input;
     }
-
 
 }

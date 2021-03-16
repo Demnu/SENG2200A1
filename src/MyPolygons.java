@@ -1,17 +1,31 @@
-public class MyPolygons<T> {
+public class MyPolygons {
 
-    Node<T> start;
-    Node<T> current;
+    private Node start;
+    private Node current;
+    private int size;
 
+    //Constructor
     MyPolygons() {
-        start = new Node<T>();
+        start = new Node();
         start.setNext(start);
         start.setPrev(start);
         current = start;
+        size = 0;
+    }
+    //Preconditions
+    //None
+    //Postconditions
+    //Returns an integer of the amount of stored nodes in the circular linked list
+    public int getSize() {
+        return size;
     }
 
-    public void addNext(T data) {
-        Node<T> temp = new Node<T>();
+    //Preconditions
+    //Recieves an object of type Polygon
+    //Postconditions
+    //Stores the object at the head of the list
+    public void prepend(Polygon data) {
+        Node temp = new Node();
         temp.setData(data);
 
         if (start == start.getNext()) {
@@ -26,14 +40,20 @@ public class MyPolygons<T> {
             temp.getNext().setPrev(temp);
             start.setNext(temp);
         }
-
+        current = start.getNext();
+        size++;
     }
 
-    public void addPrev(T data) {
 
-        Node<T> temp = new Node<T>();
+    //Preconditions
+    //Recieves an object of type Polygon
+    //Postconditions
+    //Stores the object at the tail of the list
+    public void append(Polygon data) {
+
+        Node temp = new Node();
         temp.setData(data);
-        if (start == start.getNext()){
+        if (start == start.getNext()) {
             temp.setPrev(start);
             temp.setNext(start);
             start.setNext(temp);
@@ -46,17 +66,30 @@ public class MyPolygons<T> {
             temp.getPrev().setNext(temp);
             start.setPrev(temp);
         }
-
+        current = start.getNext();
+        size++;
     }
 
+    //Preconditions
+    //None
+    //Postconditions
+    //Sets the current node to the next node of the list
     public void next() {
-        if (current.getNext() != null) {
-            current = current.getNext();
-        } else {
-            System.out.println("ERROR! Cannot get the next node");
-        }
+        current = current.getNext();
     }
 
+    //Preconditions
+    //None
+    //Postconditions
+    //Sets the current node to sentinal node
+    public void reset() {
+        current = start;
+    }
+
+    //Preconditions
+    //None
+    //Postconditions
+    //Sets the current node to the previous node of the list
     public void prev() {
         if (current.getPrev() != null) {
             current = current.getPrev();
@@ -65,66 +98,83 @@ public class MyPolygons<T> {
         }
     }
 
-    public void add_to_current(T data) {
+    //Preconditions
+    //None
+    //Postconditions
+    //Removes node at the head of the list and returns the data of said node 
+    public Polygon take() {
 
-        Node<T> temp = new Node<T>();
+        Node temp = start.getNext();
+        start.setNext(temp.getNext());
+        start.getNext().setPrev(start);
+        size--;
+
+        return temp.getData();
+    }
+
+
+    //Preconditions
+    //Recieves an object of type Polygon
+    //Postconditions
+    //Stores object of type Polygon into the list previous to the current node
+    public void insert(Polygon data) {
+
+        Node temp = new Node();
         temp.setData(data);
         temp.setNext(current);
         temp.setPrev(current.getPrev());
         temp.getPrev().setNext(temp);
         temp.getNext().setPrev(temp);
+        size++;
     }
 
-    public void showLinkedList() {
-        current = start.getNext();
-        while (current != start) {
-            System.out.println(current.getData());
-            current = current.getNext();
-        }
-        current = start;
-
-    }
-
-    public LinkedList<T> showNames(){
-
-        current = start.getNext();
-        LinkedList<T> names = new LinkedList<T>();
-        while (current !=start)
-        {
-            names.addNext(showCurrent());
-            current = current.getNext();
-        }
-        return names;
-    }
-
-    public T showCurrent() {
-        return current.getData();
-    }
-
-    public void deleteCurrent()
-    {
-        if (current == start)
-        {
+    //Preconditions
+    //Recieves an object of type Polygon
+    //Postconditions
+    //Removes current node from list
+    public void deleteCurrent() {
+        if (current == start) {
             System.out.println("Cannot delete sentinal node");
 
-        }
-        else
-        {
+        } else {
             current.getNext().setPrev(current.getPrev());
             current.getPrev().setNext(current.getNext());
             current = start;
         }
     }
 
-    public void deleteHead(){
+    //Preconditions
+    //None
+    //Postconditions
+    //Removes head node of list
+    public void deleteHead() {
         start.getNext().getNext().setPrev(start);
         start.setNext(start.getNext().getNext());
-        
+
     }
 
-    public void alterCurrent()
-    {
-        current.getData();
+    //Preconditions
+    //Recieves object of type Polygon
+    //Postconditions
+    //Inserts polygon into the correct location depending on it's area size
+    public void orderedInsert(Polygon data) {
+        current = start.getNext();
+        if (current==start) {
+            append(data);
+        } else {
+            while (current.getData() != null) {
+                if (current.getData().ComesBefore(data)) {
+                    next();
+                    if (current == start) {
+                        append(data);
+                        break;
+                    }
+                } else {
+                    insert(data);
+                    break;
+                }
+            }
+        }
+
     }
 }
-
