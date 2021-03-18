@@ -1,12 +1,10 @@
 import java.io.File; // Import the File class
 import java.io.FileNotFoundException; // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
-public class App {
+public class PA1 {
 
     public static void main(String[] args) {
         MyPolygons list = readFile(args[0]);
-        System.out.println("Hello, World!");
-        System.out.println("Unsorted List \n" + outputList(list));
         MyPolygons orderedList = createOrderedList(list);
         System.out.println("Unsorted List \n" + outputList(list));
         System.out.println("Sorted List \n" + outputList(orderedList));
@@ -43,14 +41,12 @@ public class App {
                     }
 
                 } catch (java.util.InputMismatchException e) {
-                    System.out.println(myReader.next());
-                    e.printStackTrace();
+                    myReader.next();
                 }
             }
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occured.");
-            e.printStackTrace();
         }
 
         i = 0;
